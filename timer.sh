@@ -22,7 +22,7 @@ _display_time () {
 _timer () {
 	local duration=$((25 * 60))
 	if [ ! -z $1 ]; then
-		duration=$1
+		duration=$(($1 * 60))
 	fi
 
 	_display_time
