@@ -20,7 +20,10 @@ _display_time () {
 }
 
 _timer () {
-	local duration=$((3))
+	local duration=$((25 * 60))
+	if [ ! -z $1 ]; then
+		duration=$1
+	fi
 
 	_display_time
 	sleep $duration
@@ -40,4 +43,4 @@ _pause () {
 }
 
 SECONDS=0
-_timer
+_timer $1
