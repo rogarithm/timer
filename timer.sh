@@ -28,11 +28,16 @@ _timer () {
 		_notify_with_sound
 		_notify_with_display
 		_display_time
+		elapsed=$SECONDS
+		echo "complete: $(($elapsed / 60))m $(($elapsed % 60))s"
 	fi
 }
 
 _pause () {
 	_display_time
+	elapsed=$SECONDS
+	echo "paused: $(($elapsed / 60))m $(($elapsed % 60))s"
 }
 
+SECONDS=0
 _timer
