@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-trap _pause INT
+trap _stop INT
 
 _notify_with_sound () {
 	local sound=/System/Library/Sounds/Ping.aiff
@@ -36,10 +36,10 @@ _timer () {
 	fi
 }
 
-_pause () {
+_stop () {
 	_display_time
 	elapsed=$SECONDS
-	echo "paused: $(($elapsed / 60))m $(($elapsed % 60))s"
+	echo "stopped: $(($elapsed / 60))m $(($elapsed % 60))s"
 }
 
 SECONDS=0
