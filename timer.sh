@@ -19,6 +19,12 @@ _display_time () {
 	echo $(date -v -0d "+%H:%M:%S") | sed -e 's/  / /g'
 }
 
+_stop () {
+	_display_time
+	elapsed=$SECONDS
+	echo "stopped: $(($elapsed / 60))m $(($elapsed % 60))s"
+}
+
 _timer () {
 	local duration=$((25 * 60))
 	if [ ! -z $1 ]; then
@@ -34,12 +40,6 @@ _timer () {
 		elapsed=$SECONDS
 		echo "complete: $(($elapsed / 60))m $(($elapsed % 60))s"
 	fi
-}
-
-_stop () {
-	_display_time
-	elapsed=$SECONDS
-	echo "stopped: $(($elapsed / 60))m $(($elapsed % 60))s"
 }
 
 SECONDS=0
