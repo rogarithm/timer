@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+SECONDS=0
+
 trap _stop INT
 
 _notify_with_sound () {
@@ -25,7 +27,7 @@ _stop () {
 	echo "stopped: $(($elapsed / 60))m $(($elapsed % 60))s"
 }
 
-timer () {
+_timer () {
 	local duration=$((25 * 60))
 	if [ ! -z $1 ]; then
 		duration=$(($1 * 60))
@@ -42,5 +44,3 @@ timer () {
 	fi
 }
 
-SECONDS=0
-timer $1
