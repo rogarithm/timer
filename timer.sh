@@ -25,7 +25,7 @@ _stop () {
 	echo "stopped: $(($elapsed / 60))m $(($elapsed % 60))s"
 }
 
-_timer () {
+timer () {
 	local duration=$((25 * 60))
 	if [ ! -z $1 ]; then
 		duration=$(($1 * 60))
@@ -43,4 +43,4 @@ _timer () {
 }
 
 SECONDS=0
-_timer $1
+timer $1
