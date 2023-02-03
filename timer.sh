@@ -44,3 +44,21 @@ _timer () {
 	fi
 }
 
+main () {
+	case $1 in
+		--display-time | -t) shift
+			_display_time
+			exit 0
+			;;
+		--set-time | -s) shift
+			_timer $1
+			exit 0
+			;;
+		*)
+			_timer
+			exit 0
+			;;
+	esac
+}
+
+main $@
