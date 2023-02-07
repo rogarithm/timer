@@ -27,6 +27,14 @@ _stop () {
 	echo "stopped: $(($elapsed / 60))m $(($elapsed % 60))s"
 }
 
+_help () {
+	local usage='Usage: timer [-t|-s] [time]
+	-t: display time
+	-s: set time'
+
+	echo "$usage"
+}
+
 _timer () {
 	local duration=$((25 * 60))
 	if [ ! -z $1 ]; then
@@ -52,6 +60,10 @@ main () {
 			;;
 		--set-time | -s) shift
 			_timer $1
+			exit 0
+			;;
+		--help | -h) shift
+			_help
 			exit 0
 			;;
 		*)
