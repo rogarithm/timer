@@ -54,12 +54,12 @@ _timer () {
 
 main () {
 	case $1 in
-		--display-time | -t) shift
+		--display | -d) shift
 			_display_time
 			exit 0
 			;;
-		--set-time | -s) shift
-			_timer $1
+		--concentrate | -c) shift
+			_timer 60
 			exit 0
 			;;
 		--help | -h) shift
@@ -67,7 +67,7 @@ main () {
 			exit 0
 			;;
 		*)
-			_timer
+			_timer $1
 			exit 0
 			;;
 	esac
