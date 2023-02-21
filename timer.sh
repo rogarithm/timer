@@ -5,9 +5,13 @@ SECONDS=0
 trap _stop INT
 
 _notify_with_sound () {
-	local sound=/System/Library/Sounds/Ping.aiff
+	local location=/System/Library/Sounds
+	local sound=Ping
+	if [ ! -z $1 ]; then
+		sound=$1
+	fi
 
-	afplay $sound
+	afplay ${location}/${sound}.aiff
 }
 
 _notify_with_display () {
@@ -29,11 +33,17 @@ _stop () {
 }
 
 _help () {
-	local usage='Usage: timer [-t|-s] [time]
-	-t: display time
-	-s: set time'
+	local usage="Usage: timer [-t|-s] [time]
+      --display|-d: display time
+  --concentrate|-c: set 1 study session
+          --end|-e: play notify sound 3 times
+         --help|-h: help"
+	local sound_location=/System/Library/Sounds
+	local sounds=$(ls $sound_location | sed -e s/\.aiff//g)
 
 	echo "$usage"
+	echo "sounds can be:"
+	echo $sounds
 }
 
 _timer () {
