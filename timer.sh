@@ -18,6 +18,9 @@ _notify_with_display () {
 	local text='- 몸이 굳어있다면 스트레칭 하기\n
 - 손에 힘 들어가있다면 힘 빼기'
 	local title='Timer'
+	if [ ! -z $1 ]; then
+		text=$1
+	fi
 
 	echo display notification \"${text}\" with title \"${title}\" | osascript
 }
