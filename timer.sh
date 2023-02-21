@@ -55,9 +55,11 @@ _timer () {
 		duration=$(($1 * 60))
 	fi
 
-	_display_time
+	#todo _display_time과 중복 제거
+	start_time="$(echo $(date -v -0d "+%H:%M:%S") | sed -e 's/  / /g')"
 	sleep $duration
 	if [ $? == 0 ]; then
+		echo $start_time
 		_notify_with_sound
 		_notify_with_display
 		_display_time
