@@ -73,7 +73,11 @@ main () {
 			exit 0
 			;;
 		--concentrate | -c) shift
-			_timer 60
+			_timer 25 && _timer 5
+			exit 0
+			;;
+		--end | -e) shift
+			_notify_with_sound && _notify_with_sound
 			exit 0
 			;;
 		--help | -h) shift
