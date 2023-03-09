@@ -36,17 +36,21 @@ _stop () {
 }
 
 _help () {
-	local usage="Usage: timer [-t|-s] [time]
-      --display|-d: display time
-  --concentrate|-c: set 1 study session
-          --end|-e: play notify sound 3 times
-         --help|-h: help"
 	local sound_location=/System/Library/Sounds
-	local sounds=$(ls $sound_location | sed -e s/\.aiff//g)
+	local sounds=$(ls $sound_location | sed -e s/\.aiff//g | gsed -e 's/\n/ /g')
 
-	echo "$usage"
-	echo "sounds can be:"
-	echo $sounds
+	cat << EOF
+Usage: timer [-d|-c|-e|-h] [time]
+-d: display time
+-c: set 1 study session
+-e: play notify sound 2 times
+-h: show help doc
+
+Sounds can be:
+Basso Blow Bottle Frog Funk
+Glass Hero Morse Ping Pop
+Purr Sosumi Submarine Tink
+EOF
 }
 
 _timer () {
