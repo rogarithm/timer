@@ -15,24 +15,28 @@ _notify_with_sound () {
 }
 
 _notify_with_display () {
-	local text='- 몸이 굳어있다면 스트레칭 하기\n
-- 손에 힘 들어가있다면 힘 빼기'
-	local title='Timer'
-	if [ ! -z $1 ]; then
-		text=$1
-	fi
+	local start_time=$1
+	local end_time=$2
+	local elapsed=$3
+
+	local title="세션 완료: 약 $(($elapsed / 60))분"
+	local text="$start_time - $end_time"
 
 	echo display notification \"${text}\" with title \"${title}\" | osascript
 }
 
 _display_time () {
-	echo $(date -v -0d "+%H:%M:%S") | sed -e 's/  / /g'
+	echo $(date -v -0d "+%H:%M")
 }
 
 _stop () {
 	_display_time
 	elapsed=$SECONDS
 	echo "stopped: $(($elapsed / 60))m $(($elapsed % 60))s"
+
+	local title="세션 중단: 약 $(($elapsed / 60))분"
+
+	echo display notification \"\" with title \"${title}\" | osascript
 }
 
 _help () {
@@ -60,15 +64,14 @@ _timer () {
 	fi
 
 	#todo _display_time과 중복 제거
-	start_time="$(echo $(date -v -0d "+%H:%M:%S") | sed -e 's/  / /g')"
+	start_time="$(date -v -0d "+%H:%M")"
 	sleep $duration
 	if [ $? == 0 ]; then
-		echo $start_time
+		end_time="$(date -v -0d "+%H:%M")"
 		_notify_with_sound
-		_notify_with_display
-		_display_time
+		_notify_with_display $start_time $end_time $SECONDS
 		elapsed=$SECONDS
-		echo "complete: $(($elapsed / 60))m $(($elapsed % 60))s"
+		echo "완료: $(($elapsed / 60))분 $(($elapsed % 60))초 / $start_time - $end_time" >> /tmp/.timer_log
 	fi
 }
 
