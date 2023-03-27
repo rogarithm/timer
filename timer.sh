@@ -77,15 +77,10 @@ _timer () {
 
 main () {
 	case $1 in
-		--display | -d) shift
-			_display_time
-			exit 0
-			;;
-		--concentrate | -c) shift
-			_timer 25 && _timer 5
-			exit 0
-			;;
-		--end | -e) shift
+		--session | -s) shift
+			_timer 25 && _timer 7 &&
+			_timer 25 && _timer 7 &&
+			_timer 25 && _timer 7 &&
 			_notify_with_sound && _notify_with_sound
 			exit 0
 			;;
