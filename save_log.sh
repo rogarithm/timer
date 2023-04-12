@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 input=$(cat -)
-exitstat=$(echo $input | cut -d, -f1)
+subject=$(echo $input | cut -d, -f1)
 elapsed=$(echo $input | cut -d, -f2)
 started_at=$(echo $input | cut -d, -f3) 
 ends_at=$(echo $input | cut -d, -f4)

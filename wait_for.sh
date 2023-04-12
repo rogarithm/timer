@@ -6,8 +6,9 @@ current_time () {
 	date -v -0d "+%H:%M:%S"
 }
 
-timer () {
+wait_for () {
 	local duration=''
+	local subject=''
 	local started_at=''
 	local ends_at=''
 
@@ -22,18 +23,24 @@ timer () {
 		duration=$(( $(echo $1 | cut -c3-) * 60 ))
 	fi
 
+	if [ -z $2 ]; then
+		subject=''
+	fi
+
+	subject=$2
+
 	started_at=$(current_time)
 	sleep $duration
 
 	if [ $? == 0 ]; then
 		ends_at=$(current_time)
 		elapsed=$SECONDS
-		echo "SUCCESS,${elapsed},${started_at},${ends_at}"
+		echo "${subject},${elapsed},${started_at},${ends_at}"
 	elif [ $? == 0 ]; then
 		ends_at=$(current_time)
 		elapsed=$SECONDS
-		echo "FAILED,${elapsed},${started_at},${ends_at}"
+		echo "${subject},${elapsed},${started_at},${ends_at}"
 	fi
 }
 
-timer $1
+wait_for $1 $2

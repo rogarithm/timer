@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 input=$(cat -)
-exitstatus=$(echo $input | cut -d, -f1)
+subject=$(echo $input | cut -d, -f1)
 
 notify_with_sound () {
 	local location=/System/Library/Sounds
